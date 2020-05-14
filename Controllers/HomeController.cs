@@ -39,6 +39,8 @@ namespace application.Controllers
             }
             return result;
         }
+        [HttpGet]
+        [Route("Migrate")]
         public string Migrate()
         {
             try
