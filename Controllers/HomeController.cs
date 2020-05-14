@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace application.Controllers
 {
@@ -37,6 +38,18 @@ namespace application.Controllers
                 result.msg=e.Message;
             }
             return result;
+        }
+        public string Migrate()
+        {
+            try
+            {
+                _context.Database.Migrate();
+            }
+            catch(Exception e)
+            {
+                return e.Message;
+            }
+            return "OK";
         }
 
     }
