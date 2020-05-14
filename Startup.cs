@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Models;
 
 namespace application
@@ -29,9 +29,12 @@ namespace application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DataContext")));
-
+            services.AddDbContextPool<DataContext>(options => options
+                            // replace with your connection string
+                            .UseMySql(Configuration.GetConnectionString("SalesDatabase"), mySqlOptions => mySqlOptions
+                                // replace with your Server Version and Type
+                                .ServerVersion(new Version(5, 7, 0), ServerType.MySql)
+                        ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
