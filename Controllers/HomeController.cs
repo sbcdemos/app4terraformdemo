@@ -10,19 +10,17 @@ using Microsoft.EntityFrameworkCore;
 namespace application.Controllers
 {
     public class ExampleOfDTO{
-        public int SalesCount {get; set;}
+        public int ItemsCount {get; set;}
         public string msg {get; set;}
     }
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("Stats")]
     public class HomeController : ControllerBase
     {
-        private readonly ILogger<WeatherForecastController> _logger;
         private readonly DataContext _context;
-        public HomeController(ILogger<WeatherForecastController> logger, DataContext context)
+        public HomeController(DataContext context)
         {
-            _logger = logger;
             _context = context;
         }
 
@@ -31,7 +29,7 @@ namespace application.Controllers
         {
             var result=new ExampleOfDTO();
             try{
-                result.SalesCount = _context.Sales.Count();
+                result.ItemsCount = _context.Clients.Count();
             }
             catch(Exception e)
             {
