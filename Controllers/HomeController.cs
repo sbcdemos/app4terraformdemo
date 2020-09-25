@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,6 +15,20 @@ namespace application.Controllers
         public int ItemsCount {get; set;}
         public string msg {get; set;}
     }
+    [ApiController]
+    [Route("")]
+    public class TheRootController: ControllerBase
+    {
+        IConfiguration _config;
+        public TheRootController(IConfiguration configuration)
+        {
+            this._config=configuration;
+        }
+        public string Get(){
+            return "OK from ROOT:"+_config.GetSection("ConnectionStrings")["SalesDatabase"];//Environment.GetEnvironmentVariable("ConnectionStrings:SalesDatabase");
+        }
+    }
+
 
     [ApiController]
     [Route("Stats")]
@@ -27,6 +43,7 @@ namespace application.Controllers
         [HttpGet]
         public ExampleOfDTO Get()    
         {
+            
             var result=new ExampleOfDTO();
             try{
                 result.ItemsCount = _context.Clients.Count();
@@ -36,6 +53,7 @@ namespace application.Controllers
                 result.msg=e.Message;
             }
             return result;
+            
         }
         [HttpGet]
         [Route("Migrate")]
