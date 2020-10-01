@@ -30,10 +30,61 @@ namespace application.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var client = new Client{
-                Name="Client "+(new Random()).Next(100000000).ToString("d8")
-            };
-            _context.Clients.Add(client);
+            var rand=new Random();
+
+            var x=rand.Next(7);
+            switch (x) {
+                case 0: 
+                    var client = new Client{
+                        Name="Client "+(new Random()).Next(100000000).ToString("d8")
+                    };
+                    _context.Clients.Add(client);
+                    break;
+                case 1: 
+                    var client1 = new Client1{
+                        Name="Client "+(new Random()).Next(100000000).ToString("d8")
+                    };
+                    _context.Clients1.Add(client1);
+                    break;
+                case 2: 
+                    var client2 = new Client2{
+                        Name="Client "+(new Random()).Next(100000000).ToString("d8")
+                    };
+                    _context.Clients2.Add(client2);
+                    break;
+                case 3: 
+                    var client3 = new Client3{
+                        Name="Client "+(new Random()).Next(100000000).ToString("d8")
+                    };
+                    _context.Clients3.Add(client3);
+                    break;
+                case 4: 
+                    var client4 = new Client4{
+                        Name="Client "+(new Random()).Next(100000000).ToString("d8")
+                    };
+                    _context.Clients4.Add(client4);
+                    break;
+                case 5: 
+                    var client5 = new Client5{
+                        Name="Client "+(new Random()).Next(100000000).ToString("d8")
+                    };
+                    _context.Clients5.Add(client5);
+                    break;
+                case 6: 
+                    var client6 = new Client6{
+                        Name="Client "+(new Random()).Next(100000000).ToString("d8")
+                    };
+                    _context.Clients6.Add(client6);
+                    break;
+                default: 
+                    var clientX = new Client{
+                        Name="Client "+(new Random()).Next(100000000).ToString("d8")
+                    };
+                    _context.Clients.Add(clientX);
+                    break;
+                    
+            }
+            //_context.Clients.Add(client);
             _context.SaveChanges();
 
             var rng = new Random();
