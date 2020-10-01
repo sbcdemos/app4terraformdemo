@@ -13,6 +13,8 @@ namespace application.Controllers
 {
     public class ExampleOfDTO{
         public int ItemsCount {get; set;}
+        public int Items1Count {get; set;}
+        public int Items2Count {get; set;}
         public string msg {get; set;}
     }
     [ApiController]
@@ -47,6 +49,8 @@ namespace application.Controllers
             var result=new ExampleOfDTO();
             try{
                 result.ItemsCount = _context.Clients.Count();
+                result.Items1Count = _context.Clients1.Count();
+                result.Items2Count = _context.Clients2.Count();
             }
             catch(Exception e)
             {
