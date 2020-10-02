@@ -31,10 +31,9 @@ namespace application
             services.AddControllers();
             services.AddDbContextPool<DataContext>(options => options
                             // replace with your connection string
-                            .UseMySql(Configuration.GetConnectionString("SalesDatabase"), mySqlOptions => mySqlOptions
-                                // replace with your Server Version and Type
-                                .ServerVersion(new Version(5, 7, 0), ServerType.MySql)
-                        ));
+                            .UseNpgsql(Configuration.GetConnectionString("SalesDatabasePG"))
+                            
+                        );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
